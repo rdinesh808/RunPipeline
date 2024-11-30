@@ -14,7 +14,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Step 2: Configure Git for the Workflow
+      # Step 2: Configure Git
       - name: Configure Git
         run: |
           git config user.name "github-actions[bot]"
@@ -24,12 +24,13 @@ jobs:
       - name: Fetch All Branches
         run: git fetch --all
 
-      # Step 4: Merge Test into Master
-      - name: Merge Test into Master
+      # Step 4: Merge Test into Master with Conflict Handling
+      - name: Attempt to Merge Test into Master
         run: |
           git checkout master
-          git merge test --no-edit --allow-unrelated-histories
+          git merge test --no-edit || (echo "Merge conflict detected" && git merge --abort && exit 1)
 
-      # Step 5: Push Merged Changes to Master
+      # Step 5: Push Changes to Master
       - name: Push Changes to Master
+        if: success()
         run: git push origin master
