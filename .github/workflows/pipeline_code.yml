@@ -1,9 +1,9 @@
-name: Merge Master to Main
+name: Merge Test to Main
 
 on:
   push:
     branches:
-      - master
+      - test
 
 jobs:
   merge:
@@ -11,26 +11,25 @@ jobs:
 
     steps:
       # Step 1: Checkout the repository
-      - name: Checkout Code
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Step 2: Configure Git (needed for merge commit)
+      # Step 2: Configure Git for the Workflow
       - name: Configure Git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      # Step 3: Fetch all branches
+      # Step 3: Fetch All Branches
       - name: Fetch All Branches
         run: git fetch --all
 
-      # Step 4: Merge master into main
-      - name: Merge Master into Main
+      # Step 4: Merge Test into Main
+      - name: Merge Test into Main
         run: |
           git checkout main
-          git merge master --no-edit
+          git merge test --no-edit
 
-      # Step 5: Push the changes to main
+      # Step 5: Push Merged Changes to Main
       - name: Push Changes
         run: git push origin main
-        
