@@ -3,7 +3,7 @@ name: Merge Test to Master
 on:
   push:
     branches:
-      - test  # Trigger workflow on push to test branch
+      - test
 
 jobs:
   merge:
@@ -27,9 +27,9 @@ jobs:
       # Step 4: Merge Test into Master
       - name: Merge Test into Master
         run: |
-          git checkout master   # Ensure you're on the master branch
-          git merge test --no-edit  # Merge the test branch into master
+          git checkout master
+          git merge test --no-edit --allow-unrelated-histories
 
       # Step 5: Push Merged Changes to Master
       - name: Push Changes to Master
-        run: git push origin master  # Push the merged changes to the master branch
+        run: git push origin master
