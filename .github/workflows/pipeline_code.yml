@@ -27,10 +27,10 @@ jobs:
       # Step 4: Merge Test into Master with Conflict Handling
       - name: Attempt to Merge Test into Master
         run: |
-          git checkout master
-          git merge test --no-edit || (echo "Merge conflict detected" && git merge --abort && exit 1)
+          echo "Starting the Merge execution..."
+
 
       # Step 5: Push Changes to Master
       - name: Push Changes to Master
-        if: success()
-        run: git push origin master
+        run: echo "Starting the Push execution..."
+
