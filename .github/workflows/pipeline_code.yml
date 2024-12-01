@@ -1,9 +1,11 @@
 name: Merge Test to Master
 
 on:
-  push:
-    branches:
-      - test
+  issue_comment:
+    types: [ created, edited ]
+  # push:
+  #   branches:
+  #     - test
 
 jobs:
   merge:
