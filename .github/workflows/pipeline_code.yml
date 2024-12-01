@@ -1,9 +1,10 @@
 name: Merge Test to Master
 
 on:
+  # Trigger the workflow on any push to any branch
   push:
     branches:
-      - test
+      - '**'  # Matches all branches
 
 jobs:
   merge:
@@ -24,13 +25,11 @@ jobs:
       - name: Fetch All Branches
         run: git fetch --all
 
-      # Step 4: Merge Test into Master with Conflict Handling
+      # Step 4: Print Merge Execution Message
       - name: Attempt to Merge Test into Master
         run: |
           echo "Starting the Merge execution..."
 
-
       # Step 5: Push Changes to Master
       - name: Push Changes to Master
         run: echo "Starting the Push execution..."
-
